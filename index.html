@@ -33,10 +33,15 @@
 			var start = new Date().getTime();
 			var highScore = Number.MAX_SAFE_INTEGER;
 			var size = 500;
-            var getHsUrl = "http://localhost:8081/geths"
-            var getSizeUrl = "http://localhost:8081/getsize"
-            var setScore = "http://localhost:8081/setscore"
-            var setHsUrl = "http://localhost:8081/seths"
+            // var getHsUrl = "http://localhost:8081/geths" // For local running
+            // var getSizeUrl = "http://localhost:8081/getsize"
+            // var setScore = "http://localhost:8081/setscore"
+            // var setHsUrl = "http://localhost:8081/seths"
+
+            var getHsUrl = "/geths" // For kubernetes
+            var getSizeUrl = "/getsize"
+            var setScore = "/setscore/"
+            var setHsUrl = "/seths/"
 
 			
 			function makeShapeAppear(){
@@ -90,7 +95,8 @@
 				if (timeTaken < highScore) {
                     highScore = timeTaken;
                     document.getElementById("bestScore").innerHTML = highScore + "s";
-                    setHsUrl = "http://localhost:8081/seths/" + timeTaken;
+                    // setHsUrl = "http://localhost:8081/seths/" + timeTaken;
+                    setHsUrl = "/seths/" + timeTaken;
                     $.ajax({
                         url: setHsUrl,
                         dataType: "jsonp",
@@ -100,7 +106,8 @@
                         }
                     })
 				}
-                setScore = "http://localhost:8081/setscore/" + timeTaken;
+                // setScore = "http://localhost:8081/setscore/" + timeTaken;
+                setScore = "/setscore/" + timeTaken;
                 $.ajax({
                     url: setScore,
                     dataType: "jsonp",
